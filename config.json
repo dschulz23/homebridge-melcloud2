@@ -5,7 +5,7 @@
         "port": 51826,
         "pin": "031-45-154"
     },
-    
+
     "description": "This is an example configuration file. You can use this as a template for creating your own configuration file.",
 
     "platforms": [
@@ -13,6 +13,9 @@
             "platform": "Melcloud",
             "name": "Melcloud",
             "language": "0",
+            "model": "Smart Conditioner",
+            "manufacturer": "Mitsubishi",
+            "serialNumber": "0000",
             "username": "PUT USERNAME OF YOUR MELCLOUD ACCOUNT HERE",
             "password": "PUT PASSWORD OF YOUR MELCLOUD ACCOUNT HERE"
         }
