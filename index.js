@@ -280,6 +280,10 @@ class MelcloudPlatform {
 				case 3:
 					callback(undefined, Characteristic.CurrentHeatingCoolingState.COOL);
 					return;
+				case 2:
+					callback(undefined, Characteristic.CurrentHeatingCoolingState.AUTO);
+					return;
+
 				default:
 					// Melcloud can return also 2 (deumidity), 7 (Ventilation), 8 (auto)
 					// We try to return 5 which is undefined in homekit
@@ -297,7 +301,7 @@ class MelcloudPlatform {
 				case 3:
 					callback(undefined, Characteristic.TargetHeatingCoolingState.COOL);
 					return;
-				case 8:
+				case 2:
 					callback(undefined, Characteristic.TargetHeatingCoolingState.AUTO);
 					return;
 				default:
@@ -358,7 +362,7 @@ class MelcloudPlatform {
 				break;
 			case Characteristic.TargetHeatingCoolingState.AUTO:
 				r.Power = true;
-				r.OperationMode = 8;
+				r.OperationMode = 2;
 				r.EffectiveFlags = 1 + 2;
 				break;
 			default:
@@ -516,5 +520,5 @@ module.exports = (homebridge) => {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 
-	homebridge.registerPlatform('homebridge-melcloud2', 'melcloud2', MelcloudPlatform);
+	homebridge.registerPlatform('homebridge-melcloud2-ds', 'melcloud2-ds', MelcloudPlatform);
 };
