@@ -520,5 +520,5 @@ module.exports = (homebridge) => {
 	Service = homebridge.hap.Service;
 	Characteristic = homebridge.hap.Characteristic;
 
-	homebridge.registerPlatform('homebridge-melcloud2-ds', 'melcloud2-ds', MelcloudPlatform);
+	homebridge.registerPlatform('homebridge-melcloud2', 'melcloud2', MelcloudPlatform);
 };
