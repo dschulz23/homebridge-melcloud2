@@ -58,6 +58,7 @@ class MelcloudPlatform {
 		this.language = config.language;
 		this.username = config.username;
 		this.password = config.password;
+		this.logmode = config.logmode;
 		this.ContextKey = null;
 		this.UseFahrenheit = null;
 		this.CurrentHeatingCoolingStateUUID = (new Characteristic.CurrentHeatingCoolingState()).UUID;
@@ -204,12 +205,16 @@ class MelcloudPlatform {
 
 	proxyAirInfo(callback, characteristic, service, homebridgeAccessory, value, operation) {
 		if (homebridgeAccessory.airInfo != null) {
+			if (this.logmode!="minimal"){
 			this.log(`Data already available for: ${homebridgeAccessory.name} - ${characteristic.displayName}`);
+			}
 			operation(callback, characteristic, service, homebridgeAccessory, value);
 
 			if (this.airInfoExecutionPending.length) {
 				const args = this.airInfoExecutionPending.shift();
-				this.log(`Dequeuing remote request for. ${args[3].name} - ${args[1].displayName}`);
+				if (this.logmode!="minimal"){
+				    this.log(`Dequeuing remote request for. ${args[3].name} - ${args[1].displayName}`);
+				}
 				this.proxyAirInfo(...args);
 			}
 
@@ -257,12 +262,16 @@ class MelcloudPlatform {
 
 				if (that.airInfoExecutionPending.length) {
 					const args = that.airInfoExecutionPending.shift();
-					that.log(`Dequeuing remote request for: ${args[3].name} - ${args[1].displayName}`);
+					if (this.logmode!="minimal"){
+					    that.log(`Dequeuing remote request for: ${args[3].name} - ${args[1].displayName}`);
+					}
 					that.proxyAirInfo(...args);
 				}
 			});
 		} else {
-			this.log(`Queing remote request data for: ${homebridgeAccessory.name} - ${characteristic.displayName}`);
+			if (this.logmode!="minimal"){
+			    this.log(`Queing remote request data for: ${homebridgeAccessory.name} - ${characteristic.displayName}`);
+			}
 			this.airInfoExecutionPending.push(arguments);
 		}
 	}
