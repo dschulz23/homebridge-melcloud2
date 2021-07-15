@@ -206,7 +206,7 @@ class MelcloudPlatform {
 	proxyAirInfo(callback, characteristic, service, homebridgeAccessory, value, operation) {
 		if (homebridgeAccessory.airInfo != null) {
 			if (this.logmode!="minimal"){
-			this.log(`Data already available for: ${homebridgeAccessory.name} - ${characteristic.displayName}`);
+			    this.log(`Data already available for: ${homebridgeAccessory.name} - ${characteristic.displayName}`);
 			}
 			operation(callback, characteristic, service, homebridgeAccessory, value);
 
@@ -221,7 +221,9 @@ class MelcloudPlatform {
 			return;
 		}
 
-		this.log(`Getting data for: ${homebridgeAccessory.name} - ${characteristic.displayName}`);
+        if (this.logmode!="minimal"){
+		    this.log(`Getting data for: ${homebridgeAccessory.name} - ${characteristic.displayName}`);
+		    }
 
 		if (this.currentAirInfoExecution < 1) {
 			homebridgeAccessory.airInfoRequestSent = true;
